@@ -24,11 +24,12 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'username' => fake()->userName,
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'user_profiles_id' => 1,
             'remember_token' => Str::random(10),
+            'public_id' => Str::uuid(),
         ];
     }
 
@@ -39,6 +40,16 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the model's email address is created as a verified
+     */
+    public function verified():static
+    {
+        return $this->state(fn(array $attributes) => [
+            'email_verified_at' => now(),
         ]);
     }
 }
