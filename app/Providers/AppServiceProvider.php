@@ -19,6 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //ext install absszero.vscode-laravel-gotoext install absszero.vscode-laravel-goto
     }
 }

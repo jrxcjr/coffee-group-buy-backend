@@ -37,4 +37,19 @@ class UserFactoryTest extends TestCase
 
         $this->assertSame($user->email, $createdUser->email);
     }
+
+    public function test_user_factory_can_create_profiles(): void
+    {
+        $user = User::factory()->hasProfile()->create();
+
+        $createdUser = User::find($user->id);
+        $createdUserProfile = $createdUser->profile;
+
+        $this->assertDatabaseHas('users', [
+            'user_profile_id' => $createdUserProfile->id,
+        ]);
+
+        $this->assertSame($user->profile->id, $createdUserProfile->id);
+
+    }
 }

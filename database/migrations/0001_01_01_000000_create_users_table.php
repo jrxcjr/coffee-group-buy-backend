@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('username',20);
-            $table->foreignId('user_profiles_id');
+            $table->foreignId('user_profile_id');
             $table->timestamps();
         });
 

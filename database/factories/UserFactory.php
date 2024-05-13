@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\UserProfile;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Database\Factories\UserProfilesFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -27,7 +29,12 @@ class UserFactory extends Factory
             'username' => fake()->userName,
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'user_profiles_id' => 1,
+            'user_profile_id' => 1,
+            /*
+                this should be used instead =>  'user_profile_id'   => function () {
+            return factory(App\User::class)->create()->id;
+        }
+            */
             'remember_token' => Str::random(10),
             'public_id' => Str::uuid(),
         ];
@@ -52,4 +59,10 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
         ]);
     }
+
+    // public function withProfile():static
+    // {
+    //     return $this->afterCreating(fn(User $user) => [
+    //         $user->profile()->create(UserProfile::factory()->create()->toArray())]);
+    // }
 }

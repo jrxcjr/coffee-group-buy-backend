@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('address', 100);
             $table->text('address_complement', 100);
             $table->string('cellphone',50);
+            $table->timestamps();
         });
     }
 
